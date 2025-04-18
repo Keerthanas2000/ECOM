@@ -3,7 +3,9 @@ import Navbar from '../components/Navbar'
 
 function Kids() {
   return (
-    <div><Navbar/>    <p>Kids</p>
+    <div><Navbar/> 
+    <br/>
+       <h2>  Kids collection launching soon....</h2>
 </div>  )
 }
 

@@ -19,7 +19,6 @@ function Productitem(props) {
         <span className="fas fa-star"></span>
         <span className="fas fa-star"></span>
         <span className="fas fa-star"></span>
-        <span className="fas fa-star"></span>
       </div>
       <div className="price">&#8377;&nbsp;{parseFloat(props.prod.price).toFixed(2)}</div>    </div>
   );

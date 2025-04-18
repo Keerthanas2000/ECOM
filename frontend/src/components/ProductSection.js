@@ -1,14 +1,23 @@
 import React, { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import Productitem from './Productitem'
 
 function ProductSection() {
-  const [products, setproducts] = useState([])
+  const [products, setProducts] = useState([])
+  const location = useLocation()
 
   useEffect(() => {
-    fetch('https://fakestoreapi.com/products')
+    const category = location.pathname.split('/')[1]
+
+    const url = category==="jewelery"
+      ? `https://fakestoreapi.com/products/category/jewelery`
+      : 'https://fakestoreapi.com/products'
+
+    fetch(url)
       .then(res => res.json())
-      .then(data => setproducts(data))
-  }, [])
+      .then(data => setProducts(data))
+      .catch(err => console.error('Failed to fetch products:', err))
+  }, [location])
 
   return (
     <div className="container bg-white">

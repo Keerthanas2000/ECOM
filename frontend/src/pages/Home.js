@@ -10,7 +10,10 @@ function Home() {
       <Navbar />
 
       <Carousel />
+<br/>
+<h3 style={{color:"purple"}}>Get the new iPhone – Power, Performance, Perfection in your hands.
 
+</h3>
       <div className="row">
           {Productarr.map((el) => (
             <Ads name={el} />

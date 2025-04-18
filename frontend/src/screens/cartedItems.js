@@ -4,12 +4,15 @@ import Navbar from '../components/Navbar';
 import { Link } from 'react-router-dom';
 
 function CartDetails() {
-  const cartItems = useSelector(state => state.cartItems);
-  const cartCounter = useSelector(state => state.cartCounter);
-  const totalPrice = useSelector(state => state.totalPrice);
-  const deliveryCharges = useSelector(state => state.deliveryCharges);
-  const taxes = useSelector(state => state.taxes);
-  const grandTotal = useSelector(state => state.grandTotal);
+      const cartItems = useSelector(state => state.cart?.cartItems || []);
+
+
+  console.log("state", cartItems)
+  const cartCounter = useSelector(state => state.cart.cartCounter);
+  const totalPrice = useSelector(state => state.cart.totalPrice);
+  const deliveryCharges = useSelector(state => state.cart.deliveryCharges);
+  const taxes = useSelector(state => state.cart.taxes);
+  const grandTotal = useSelector(state => state.cart.grandTotal);
 
   return (
     <div className="container bg-white mt-5">
@@ -79,10 +82,14 @@ function CartDetails() {
                 <p>Total</p>
                 <p>{grandTotal.toFixed(2)}</p>
               </div>
-
-              <Link className='float-end btn btn-success mt-3' to='/payment'>
+              <div className='d-flex justify-content-between px-2 fw-bold border-top pt-2'>
+                <>&nbsp;</>
+              <Link className='float-end btn btn-success mt-7' to='/payment'>
                 Proceed to Checkout
               </Link>
+              </div>
+
+             
             </div>
           </div>
         </div>
