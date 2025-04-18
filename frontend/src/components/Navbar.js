@@ -1,11 +1,15 @@
 import React from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import logo from '../components/images/Trendifylogo.png';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import { useSelector } from 'react-redux';
 
 function Navbar() {
   const location = useLocation();
   const isActive = (path) => location.pathname === path;
 
+
+  const cartCounter=useSelector(state=>state.cartCounter)
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
@@ -50,6 +54,16 @@ function Navbar() {
                   Beauty {isActive('/beauty') && <span style={{ position: 'absolute', left: 0, bottom: '-2px', width: '100%', height: '2px', backgroundColor: 'purple' }}></span>}
                 </Link>
               </li>
+              <li className="nav-item">
+  <Link className="nav-link position-relative" to="/cart">
+    <i className="fas fa-shopping-cart" style={{ color: 'purple', fontSize: '1.2rem' }}></i>
+    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+      {cartCounter}
+    </span>
+  </Link>
+</li>
+
+
             </ul>
           </div>
         </div>

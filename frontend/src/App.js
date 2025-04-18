@@ -7,6 +7,7 @@ import Kids from "./pages/Kids";
 import Beauty from "./pages/Beauty";
 import Living from "./pages/Living";
 import Details from "./pages/Details";
+import CartDetails from "./screens/cartedItems";
 
 
 function App() {
@@ -21,6 +22,8 @@ function App() {
         <Route path="/beauty" element={<Beauty />} />
         <Route path="/living" element={<Living />} />
         <Route path="/details" element={<Details />} />
+        <Route path="/cart" element={<CartDetails />} />
+
       </Routes>
     </BrowserRouter>
   );

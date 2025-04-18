@@ -6,7 +6,7 @@ function Productitem(props) {
     <div className="col-lg-3 col-sm-6 d-flex flex-column align-items-center justify-content-center product-item my-3">
       <div className="product">
         <img
-        style={{height:"50vh"}}
+        style={{height:"50vh", width:"auto"}}
           src={props.prod.image}
           alt={props.prod.title}
         />
