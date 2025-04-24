@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background-color: #fff5f5; min-height: 100vh; display: grid; place-items: center; }
+    .login-box { 
+      background: white; padding: 2.5rem; border-radius: 10px; 
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); max-width: 400px; width: 100%; 
+    }
+    .btn-custom { background: #ff3f6c; color: white; font-weight: bold; }
+    .btn-custom:hover { background: #e6335d; }
+    .small-text { font-size: 0.875rem; }
+    .error-text { color: red; font-size: 0.8125rem; display: none; }
+    a.text-link { color: #ff3f6c; font-weight: 500; text-decoration: none; cursor: pointer; }
+    a.text-link:hover { text-decoration: underline; }
+  </style>
+</head>
+
+<body>
+  <div class="login-box">
+    <h4><strong>Login</strong> or <strong>Signup</strong></h4>
+    <div class="mb-3 mt-4">
+      <div class="input-group">
+        <span class="input-group-text">+91</span>
+        <input type="tel" class="form-control" id="mobileInput" placeholder="Mobile Number" required>
+      </div>
+      <div class="error-text" id="errorText">Please enter a valid 10-digit mobile number.</div>
+    </div>
+    <p class="small-text mt-3">
+      By continuing, I agree to the
+      <a class="text-link" onclick="openModal('tc.txt', 'Terms of Use')">Terms of Use</a> &
+      <a class="text-link" onclick="openModal('policy.txt', 'Privacy Policy')">Privacy Policy</a>
+      and I am above 18 years old.
+    </p>
+    <div class="d-grid mt-3">
+      <button class="btn btn-custom" onclick="validatePhone()">CONTINUE</button>
+    </div>
+    <p class="small-text text-center mt-3">
+      Have trouble logging in? <a class="text-link" onclick="openModal('gethelp.txt', 'Contact us')">Get help</a>
+    </p>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="textModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="textModalLabel"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" id="modalContent">Loading...</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Simplified functions
+    const validatePhone = () => {
+      const input = document.getElementById("mobileInput").value.trim();
+      const error = document.getElementById("errorText");
+      error.style.display = /^[6-9]\d{9}$/.test(input) ? "none" : "block";
+    };
+
+    const openModal = (file, title) => {
+      const modalLabel = document.getElementById("textModalLabel");
+      const modalContent = document.getElementById("modalContent");
+      
+      modalLabel.textContent = title;
+      modalContent.textContent = "Loading...";
+      
+      fetch(file)
+        .then(res => res.text())
+        .then(text => {
+          modalContent.innerHTML = text.replace(/\n/g, "<br>");
+          new bootstrap.Modal("#textModal").show();
+        })
+        .catch(() => modalContent.textContent = "Failed to load content.");
+    };
+  </script>
+</body>
+</html>
+
+

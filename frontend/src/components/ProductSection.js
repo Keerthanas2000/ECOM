@@ -1,22 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import Productitem from './Productitem'
+import axios from 'axios'
 
 function ProductSection() {
   const [products, setProducts] = useState([])
   const location = useLocation()
 
   useEffect(() => {
-    const category = location.pathname.split('/')[1]
-
-    const url = category==="jewelery"
-      ? `https://fakestoreapi.com/products/category/jewelery`
-      : 'https://fakestoreapi.com/products'
-
-    fetch(url)
-      .then(res => res.json())
-      .then(data => setProducts(data))
-      .catch(err => console.error('Failed to fetch products:', err))
+    axios.get("http://localhost:3000/api/products?type=homeprod")
+      .then(response => {
+        setProducts(response.data)
+      })
+      .catch(error => console.error('Error fetching data: ', error))
   }, [location])
 
   return (
